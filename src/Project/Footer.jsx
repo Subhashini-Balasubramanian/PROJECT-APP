@@ -35,9 +35,7 @@ export default function Footer() {
             <Typography variant="h6" color="text.primary" gutterBottom>
               Contact Us
             </Typography>
-            {/* // <Typography variant="body2" color="text.secondary">
-            //   123 Main Street, Anytown, USA
-            // </Typography> */}
+            
             <Typography variant="body2" color="text.secondary">
               Email: relaxinn@example.com
             </Typography>
