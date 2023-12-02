@@ -1100,3 +1100,307 @@ class MainThread{
 }
 
 ________________________________________________________________________________________________________
+Model Lab - 22 to 25
+
+22. studentdetails form
+
+.java file code
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class StudentDetailsForm extends JFrame {
+    private JLabel nameLabel, regNoLabel, cgpaLabel, genderLabel;
+    private JTextField nameField, regNoField, cgpaField;
+    private JCheckBox maleCheckBox, femaleCheckBox;
+    private JButton submitButton;
+
+    public StudentDetailsForm() {
+        setTitle("Student Details Form");
+        setSize(400, 250);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
+        nameLabel = new JLabel("Name:");
+        nameLabel.setBounds(50, 30, 80, 20);
+        add(nameLabel);
+
+        nameField = new JTextField();
+        nameField.setBounds(150, 30, 200, 20);
+        add(nameField);
+
+        regNoLabel = new JLabel("Reg No:");
+        regNoLabel.setBounds(50, 60, 80, 20);
+        add(regNoLabel);
+
+        regNoField = new JTextField();
+        regNoField.setBounds(150, 60, 200, 20);
+        add(regNoField);
+
+        cgpaLabel = new JLabel("CGPA:");
+        cgpaLabel.setBounds(50, 90, 80, 20);
+        add(cgpaLabel);
+
+        cgpaField = new JTextField();
+        cgpaField.setBounds(150, 90, 200, 20);
+        add(cgpaField);
+
+        genderLabel = new JLabel("Gender:");
+        genderLabel.setBounds(50, 120, 80, 20);
+        add(genderLabel);
+
+        maleCheckBox = new JCheckBox("Male");
+        maleCheckBox.setBounds(150, 120, 80, 20);
+        add(maleCheckBox);
+
+        femaleCheckBox = new JCheckBox("Female");
+        femaleCheckBox.setBounds(250, 120, 80, 20);
+        add(femaleCheckBox);
+
+        submitButton = new JButton("Submit");
+        submitButton.setBounds(150, 160, 100, 30);
+        add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameField.getText();
+                String regNo = regNoField.getText();
+                String cgpa = cgpaField.getText();
+                String gender = "";
+
+                if (maleCheckBox.isSelected() && !femaleCheckBox.isSelected()) {
+                    gender = "Male";
+                } else if (!maleCheckBox.isSelected() && femaleCheckBox.isSelected()) {
+                    gender = "Female";
+                } else {
+                    gender = "Not specified";
+                }
+
+                String welcomeMessage = "Welcome, " + name + "!\n" +
+                                        "Reg No: " + regNo + "\n" +
+                                        "CGPA: " + cgpa + "\n" +
+                                        "Gender: " + gender;
+
+                JOptionPane.showMessageDialog(null, welcomeMessage);
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        StudentDetailsForm detailsForm = new StudentDetailsForm();
+        detailsForm.setVisible(true);
+    }
+}
+
+-------------------------------------------------------------------------------------
+
+23. trainerfeedback form
+
+.java file code
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TrainerFeedbackForm extends JFrame {
+    private JCheckBox clarityCheckBox;
+    private JCheckBox clarityCheckBox1;
+    private JCheckBox doubtsCheckBox;
+    private JCheckBox doubtsCheckBox1;
+    private JCheckBox interactionCheckBox;
+    private JCheckBox interactionCheckBox1;
+    private JTextField ratingTextField;
+    private JButton submitButton;
+
+    public TrainerFeedbackForm() {
+        setTitle("Trainer Feedback Form");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2));
+
+        JLabel clarityLabel = new JLabel("Were the contents delivered clearly by the trainer?");
+        clarityCheckBox = new JCheckBox("Yes");
+        clarityCheckBox1 = new JCheckBox("No");
+        add(clarityLabel);
+        add(clarityCheckBox);
+        add(clarityCheckBox1);
+
+        JLabel doubtsLabel = new JLabel("Do the trainers clear all your doubts?");
+        doubtsCheckBox = new JCheckBox("Yes");
+        doubtsCheckBox1 = new JCheckBox("No");
+        add(doubtsLabel);
+        add(doubtsCheckBox);
+        add(doubtsCheckBox1);
+
+        JLabel interactionLabel = new JLabel("Do the trainers interact?");
+        interactionCheckBox = new JCheckBox("Yes");
+        interactionCheckBox1 = new JCheckBox("No");
+        add(interactionLabel);
+        add(interactionCheckBox);
+        add(interactionCheckBox1);
+
+        JLabel ratingLabel = new JLabel("Rate the trainer on a scale of 1 to 10:");
+        ratingTextField = new JTextField();
+        add(ratingLabel);
+        add(ratingTextField);
+
+        submitButton = new JButton("Submit");
+        add(new JLabel()); // Placeholder
+        add(submitButton);
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Retrieve user feedback and rating
+                clarityCheckBox.isSelected();
+                clarityCheckBox1.isSelected();
+                doubtsCheckBox.isSelected();
+                doubtsCheckBox1.isSelected();
+                interactionCheckBox.isSelected();
+                interactionCheckBox1.isSelected();
+                ratingTextField.getText();
+
+                // Process the feedback and rating as needed (e.g., store in a database)
+
+                // Show a confirmation dialog
+                JOptionPane.showMessageDialog(null, "Feedback submitted successfully.");
+
+                // Reset the form
+                clarityCheckBox.setSelected(false);
+                clarityCheckBox1.setSelected(false);
+                doubtsCheckBox.setSelected(false);
+                doubtsCheckBox1.setSelected(false);
+                interactionCheckBox.setSelected(false);
+                interactionCheckBox1.setSelected(false);
+                ratingTextField.setText("");
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                TrainerFeedbackForm feedbackForm = new TrainerFeedbackForm();
+                feedbackForm.setVisible(true);
+            }
+        });
+    }
+}
+
+----------------------------------------------------------------------------------------------
+
+24. servlet 1 login page
+
+.java file code
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/LoginServlet")
+public class GenericServletApp1 extends GenericServlet{
+    public void service(ServletRequest request,ServletResponse response)
+    		throws ServletException,IOException
+    {
+        response.setContentType("text/html");
+        PrintWriter out=response.getWriter();
+        String s1=request.getParameter("uname");
+        String s2=request.getParameter("pass");
+        out.println("<h1>"+s1+"</h1>");
+        out.println("<h1>"+s2+"</h1>");
+        out.println("<h1>"+"The entered details are valid"+"<h2>");
+        out.println("<a href='Index.html'>Back</a>");        
+        out.close();
+    }
+}
+
+.html file code
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    
+    <form action="LoginServlet" method="post" style="margin-left: 40%;">
+		<table>
+			<tr>
+				<td colspan="2" style="text-align: center;"><h1>Login</h1></td>
+			</tr>
+			<tr>
+				<td>Enter UserName:</td>
+				<td><input type="text" name="uname"></td>
+			</tr>
+			<tr>
+				<td>Enter Password:</td>
+				<td><input type="password" name="pass"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;"><input type="submit" value="Click here to submit"></td>
+			</tr>
+		</table>
+        
+    </form>
+</body>
+</html>
+
+------------------------------------------------------------------------------------------------------------
+25. servlet 2 add two numbers
+
+.java file code
+
+import javax.servlet.*;
+import java.io.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/servadd")
+public class ssadd extends HttpServlet{
+	public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException
+	{
+	PrintWriter out = res.getWriter();
+	res.setContentType("text/html");
+	int a=Integer.parseInt(req.getParameter("t1"));
+	int b=Integer.parseInt(req.getParameter("t2"));
+	int c=a+b;
+	out.println("Sum of two numbers are "+c);
+	}
+}
+
+
+.html file code
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Addition Page</title>
+</head>
+<body>
+    
+		<form action="servadd" method ="get" style="margin-left: 40%">
+		<table>
+			<tr>
+				<td colspan="2" style="text-align: center;"><h1>Addition of two numbers</h1></td>
+			</tr>
+			<tr>
+				<td>Enter number 1:</td>
+				<td><input type="text" name="t1"></td>
+			</tr>
+			<tr>
+				<td>Enter number 2:</td>
+				<td><input type="text" name="t2"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;"><input type="submit" value="Click here to submit"></td>
+			</tr>
+		</table>
+        
+    </form>
+</body>
+</html>
